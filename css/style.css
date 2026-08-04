@@ -533,6 +533,8 @@ footer{
 
     transition: .3s;
 
+    pointer-events: none;
+
 }
 
 .photo-card img {

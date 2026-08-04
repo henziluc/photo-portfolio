@@ -67,7 +67,7 @@ function renderGallery(photoList) {
 // ======================
 
 function addImageClickEvents() {
-
+    console.log("Adding image click events");
     const galleryImages =
         document.querySelectorAll(".photo-card img");
 
@@ -79,11 +79,17 @@ function addImageClickEvents() {
 
             showPhoto();
 
+            
+
         });
 
+
+        
     });
 
 }
+
+
 
 // ======================
 // Lightbox
