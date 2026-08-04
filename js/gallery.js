@@ -1,44 +1,6 @@
 
+import { photos } from "./data.js";
 
-const photos = [
-
-    {
-        file: "lake.jpeg",
-        title: "Lake",
-        location: "Costa Rica",
-        camera: "Sony A6700",
-        lens: "20mm f/1.8",
-        year: 2026
-    },
-
-    {
-        file: "ocean.jpeg",
-        title: "Ocean",
-        location: "Costa Rica",
-        camera: "Sony A6700",
-        lens: "20mm f/1.8",
-        year: 2026
-    },
-
-    {
-        file: "village.jpeg",
-        title: "Village",
-        location: "Martinique",
-        camera: "Sony A6700",
-        lens: "20mm f/1.8",
-        year: 2026
-    },
-
-    {
-        file: "apostels.jpeg",
-        title: "Apostels",
-        location: "South Africa",
-        camera: "Sony A6700",
-        lens: "20mm f/1.8",
-        year: 2025
-    }
-
-];
 
 const gallery = document.getElementById("gallery");
 
@@ -46,23 +8,23 @@ photos.forEach(photo => {
 
     gallery.innerHTML += `
 
-<figure class="photo-card">
+    <figure class="photo-card">
 
-    <img
-        src="../images/landscape/${photo.file}"
-        alt="${photo.title}">
+        <img
+            src="../images/landscape/${photo.file}"
+            alt="${photo.title}">
 
-    <figcaption>
+        <figcaption>
 
-        <h3>${photo.title}</h3>
+            <h3>${photo.title}</h3>
 
-        <p>${photo.location}</p>
+            <p>${photo.location}</p>
 
-        <p>${photo.camera}</p>
+            <p>${photo.camera}</p>
 
-    </figcaption>
+        </figcaption>
 
-</figure>
+    </figure>
 
 `;
 
@@ -106,21 +68,7 @@ galleryImages.forEach((image, index) => {
 
 });
 
-function showPhoto() {
-
-    lightbox.classList.add("open");
-
-    lightboxImage.src =
-        "../images/landscape/" +
-        photos[currentPhoto].file;
-
-    lightboxTitle.textContent =
-        photos[currentPhoto].title;
-
-    imageCounter.textContent =
-        `${currentPhoto + 1} / ${photos.length}`;
-
-}
+import { showPhoto } from "./lightbox.js";
 
 
 
