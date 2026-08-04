@@ -1,76 +1,114 @@
-
 import { photos } from "./data.js";
 
+// ======================
+// DOM Elements
+// ======================
 
 const gallery = document.getElementById("gallery");
 
-photos.forEach(photo => {
+const filterButtons = document.querySelectorAll(".filters button");
 
-    gallery.innerHTML += `
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const lightboxTitle = document.getElementById("lightbox-title");
+const imageCounter = document.getElementById("image-counter");
 
-    <figure class="photo-card">
+const previousButton = document.getElementById("previous");
+const nextButton = document.getElementById("next");
+const closeButton = document.getElementById("close");
 
-        <img
-            src="../images/landscape/${photo.file}"
-            alt="${photo.title}">
+// ======================
+// Variables
+// ======================
 
-        <figcaption>
+// Which photos are currently displayed?
+let currentPhotos = [...photos];
 
-            <h3>${photo.title}</h3>
-
-            <p>${photo.location}</p>
-
-            <p>${photo.camera}</p>
-
-        </figcaption>
-
-    </figure>
-
-`;
-
-});
-
-const lightbox =
-    document.getElementById("lightbox");
-
-const lightboxImage =
-    document.getElementById("lightbox-image");
-
-const previousButton =
-    document.getElementById("previous");
-
-const nextButton =
-    document.getElementById("next");
-
-const closeButton =
-    document.getElementById("close");
-
-const lightboxTitle =
-    document.getElementById("lightbox-title");
-
+// Which photo is currently open?
 let currentPhoto = 0;
 
-const galleryImages =
-    document.querySelectorAll(".photo-card img");
+// ======================
+// Gallery
+// ======================
 
-const imageCounter =
-    document.getElementById("image-counter");
+function renderGallery(photoList) {
 
-galleryImages.forEach((image, index) => {
+    gallery.innerHTML = "";
 
-    image.addEventListener("click", () => {
+    currentPhotos = photoList;
 
-        currentPhoto = index;
+    photoList.forEach((photo, index) => {
 
-        showPhoto();
+        gallery.innerHTML += `
+            <figure class="photo-card">
+
+                <img
+                    src="../images/landscape/${photo.file}"
+                    alt="${photo.title}"
+                    data-index="${index}">
+
+                <figcaption>
+
+                    ${photo.title}
+
+                </figcaption>
+
+            </figure>
+        `;
 
     });
 
-});
+    addImageClickEvents();
 
-import { showPhoto } from "./lightbox.js";
+}
 
+// ======================
+// Click Events
+// ======================
 
+function addImageClickEvents() {
+
+    const galleryImages =
+        document.querySelectorAll(".photo-card img");
+
+    galleryImages.forEach(image => {
+
+        image.addEventListener("click", () => {
+
+            currentPhoto = Number(image.dataset.index);
+
+            showPhoto();
+
+        });
+
+    });
+
+}
+
+// ======================
+// Lightbox
+// ======================
+
+function showPhoto() {
+
+    const photo = currentPhotos[currentPhoto];
+
+    lightbox.classList.add("open");
+
+    lightboxImage.src =
+        "../images/landscape/" + photo.file;
+
+    lightboxTitle.textContent =
+        photo.title;
+
+    imageCounter.textContent =
+        `${currentPhoto + 1} / ${currentPhotos.length}`;
+
+}
+
+// ======================
+// Close Lightbox
+// ======================
 
 closeButton.addEventListener("click", () => {
 
@@ -78,11 +116,27 @@ closeButton.addEventListener("click", () => {
 
 });
 
+// Close when clicking the dark background
+
+lightbox.addEventListener("click", (event) => {
+
+    if (event.target === lightbox) {
+
+        lightbox.classList.remove("open");
+
+    }
+
+});
+
+// ======================
+// Next
+// ======================
+
 nextButton.addEventListener("click", () => {
 
     currentPhoto++;
 
-    if (currentPhoto >= photos.length) {
+    if (currentPhoto >= currentPhotos.length) {
 
         currentPhoto = 0;
 
@@ -92,13 +146,17 @@ nextButton.addEventListener("click", () => {
 
 });
 
+// ======================
+// Previous
+// ======================
+
 previousButton.addEventListener("click", () => {
 
     currentPhoto--;
 
     if (currentPhoto < 0) {
 
-        currentPhoto = photos.length - 1;
+        currentPhoto = currentPhotos.length - 1;
 
     }
 
@@ -106,7 +164,13 @@ previousButton.addEventListener("click", () => {
 
 });
 
+// ======================
+// Keyboard Navigation
+// ======================
+
 document.addEventListener("keydown", (event) => {
+
+    if (!lightbox.classList.contains("open")) return;
 
     if (event.key === "Escape") {
 
@@ -128,12 +192,46 @@ document.addEventListener("keydown", (event) => {
 
 });
 
-lightbox.addEventListener("click", (event) => {
+// ======================
+// Filters
+// ======================
 
-    if (event.target === lightbox) {
+filterButtons.forEach(button => {
 
-        lightbox.classList.remove("open");
+    button.addEventListener("click", () => {
 
-    }
+        // Remove active class
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        // Highlight current button
+        button.classList.add("active");
+
+        const category = button.dataset.category;
+
+        if (category === "all") {
+
+            renderGallery(photos);
+
+        } else {
+
+            const filteredPhotos = photos.filter(photo => {
+
+                return photo.category === category;
+
+            });
+            
+            renderGallery(filteredPhotos);
+
+        }
+
+    });
 
 });
+
+// ======================
+// Initial Gallery
+// ======================
+
+renderGallery(photos);
