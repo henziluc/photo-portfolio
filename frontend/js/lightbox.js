@@ -71,7 +71,7 @@ function showPhoto() {
 
 
     lightboxImage.src =
-        "../images/landscape/" + photo.file;
+        "../images/" + photo.folder + "/" + photo.file;
 
 
     lightboxTitle.textContent =

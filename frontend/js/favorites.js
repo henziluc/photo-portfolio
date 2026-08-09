@@ -2,21 +2,27 @@ let favorites =
     JSON.parse(localStorage.getItem("favorites")) || [];
 
 
+// Make sure all IDs are numbers
+
+favorites = favorites.map(id => Number(id));
+
+
 // ======================
 // Toggle Favorite
 // ======================
 
 export function toggleFavorite(id) {
 
+    id = Number(id);
+
+
     if (favorites.includes(id)) {
 
-        favorites =
-            favorites.filter(photoId =>
-                photoId !== id
-            );
+        favorites = favorites.filter(
+            photoId => photoId !== id
+        );
 
-    }
-    else {
+    } else {
 
         favorites.push(id);
 
@@ -37,7 +43,7 @@ export function toggleFavorite(id) {
 
 export function isFavorite(id) {
 
-    return favorites.includes(id);
+    return favorites.includes(Number(id));
 
 }
 

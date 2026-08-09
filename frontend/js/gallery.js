@@ -54,7 +54,7 @@ function renderGallery(photoList) {
             <figure class="photo-card">
 
                 <img
-                    src="../images/landscape/${photo.file}"
+                    src="../images/${photo.folder}/${photo.file}"
                     alt="${photo.title}"
                     data-index="${index}"
                 >
@@ -141,7 +141,9 @@ function addFavoriteEvents() {
 
     buttons.forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
+
+            event.stopPropagation();
 
             const id =
                 button.dataset.id;
