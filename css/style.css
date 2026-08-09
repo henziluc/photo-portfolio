@@ -763,3 +763,139 @@ footer{
     right: 30px;
 
 }
+
+
+/* ===========================
+   ABOUT
+=========================== */
+
+.about-hero {
+
+    max-width: 1200px;
+
+    margin: 100px auto;
+
+    padding: 0 30px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+}
+
+.about-image img {
+
+    width: 100%;
+
+    max-height: 650px;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+
+}
+
+.about-intro h1 {
+
+    font-size: clamp(2.5rem, 5vw, 5rem);
+
+    font-weight: 400;
+
+    margin: 15px 0 30px;
+
+}
+
+.eyebrow {
+
+    font-size: .75rem;
+
+    letter-spacing: 3px;
+
+    font-weight: 600;
+
+    opacity: .6;
+
+}
+
+.about-intro p:not(.eyebrow) {
+
+    font-size: 1.1rem;
+
+    line-height: 1.8;
+
+    max-width: 600px;
+
+    margin-bottom: 20px;
+
+}
+
+.about-story {
+
+    max-width: 800px;
+
+    margin: 80px auto;
+
+    padding: 0 30px;
+
+}
+
+.about-story h2 {
+
+    font-size: clamp(2rem, 4vw, 4rem);
+
+    font-weight: 400;
+
+    margin: 20px 0 30px;
+
+}
+
+.about-story p {
+
+    font-size: 1.1rem;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+
+}
+
+.about-categories {
+
+    max-width: 1200px;
+
+    margin: 80px auto;
+
+    padding: 0 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 50px;
+
+}
+
+.about-categories h3 {
+
+    font-size: 1.5rem;
+
+    font-weight: 400;
+
+    margin-bottom: 15px;
+
+}
+
+
+.about-categories p {
+
+    line-height: 1.7;
+
+    opacity: .7;
+
+}
+
