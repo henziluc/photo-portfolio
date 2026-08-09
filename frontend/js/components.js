@@ -1,6 +1,6 @@
 async function loadNavbar() {
 
-    const response = await fetch("../components/navbar.html");
+    const response = await fetch("/frontend/components/navbar.html");
 
     const html = await response.text();
 
@@ -13,7 +13,7 @@ loadNavbar();
 async function loadFooter() {
 
     const response =
-        await fetch("../components/footer.html");
+        await fetch("/frontend/components/footer.html");
 
     document.getElementById("footer").innerHTML =
         await response.text();
