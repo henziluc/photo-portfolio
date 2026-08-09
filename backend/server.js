@@ -1,19 +1,54 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
 
 const app = express();
 
 const PORT = 3000;
-app.use(cors());
 
+
+// Middleware
+
+app.use(cors());
 
 app.use(express.json());
 
 
-const emailRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Email transporter
+
+const transporter = nodemailer.createTransport({
+
+    host: "smtp.gmail.com",
+
+    port: 587,
+
+    secure: false,
+
+    auth: {
+
+        user: process.env.EMAIL_USER,
+
+        pass: process.env.EMAIL_PASSWORD
+
+    }
+
+});
 
 
-app.post("/api/contact", (req, res) => {
+// Email validation
+
+const emailRegex =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+// Contact endpoint
+
+app.post("/api/contact", async (req, res) => {
+
+
+    // Get form data
 
     const {
         name,
@@ -31,7 +66,8 @@ app.post("/api/contact", (req, res) => {
 
             success: false,
 
-            message: "Name, email and message are required."
+            message:
+                "Name, email and message are required."
 
         });
 
@@ -46,7 +82,8 @@ app.post("/api/contact", (req, res) => {
 
             success: false,
 
-            message: "Name is too long."
+            message:
+                "Name is too long."
 
         });
 
@@ -61,7 +98,8 @@ app.post("/api/contact", (req, res) => {
 
             success: false,
 
-            message: "Please provide a valid email address."
+            message:
+                "Please provide a valid email address."
 
         });
 
@@ -76,7 +114,8 @@ app.post("/api/contact", (req, res) => {
 
             success: false,
 
-            message: "Message is too long."
+            message:
+                "Message is too long."
 
         });
 
@@ -86,23 +125,76 @@ app.post("/api/contact", (req, res) => {
     console.log("Valid message received!");
 
     console.log({
+
         name,
         email,
         subject,
         message
-    });
-
-
-    res.json({
-
-        success: true,
-
-        message: "Message received successfully."
 
     });
+
+
+    // Send email
+
+    try {
+
+        await transporter.sendMail({
+
+            from: process.env.EMAIL_USER,
+
+            to: process.env.EMAIL_USER,
+
+            replyTo: email,
+
+            subject:
+                `Portfolio contact: ${subject}`,
+
+            text: `
+Name: ${name}
+
+Email: ${email}
+
+Message:
+
+${message}
+            `
+
+        });
+
+
+        // Tell frontend that email was sent
+
+        res.json({
+
+            success: true,
+
+            message:
+                "Your message has been sent!"
+
+        });
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "The message could not be sent."
+
+        });
+
+    }
 
 });
 
+
+// Start server
 
 app.listen(PORT, () => {
 
