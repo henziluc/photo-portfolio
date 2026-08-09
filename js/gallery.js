@@ -60,8 +60,9 @@ function renderGallery(photoList) {
 
                 <figcaption>
 
-                    ${photo.title}
-
+                    <div>${photo.title}</div>
+                    <div class="photo-location">${photo.location}</div>
+                    <div class="photo-camera">${photo.camera}</div>
                 </figcaption>
 
             </figure>

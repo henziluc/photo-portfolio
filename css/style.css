@@ -572,6 +572,17 @@ footer{
 
 }
 
+.photo-card .photo-location,
+.photo-card .photo-camera {
+
+    font-size: 0.9rem;
+    
+    font-weight: normal;
+
+    color: #aaaaaa;
+
+}   
+
 .photo-card h3{
     font-size: 1.3rem;
 
