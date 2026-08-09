@@ -1010,7 +1010,9 @@ footer{
 
     border: none;
 
-    background: #111;
+    border-radius: 10px;
+
+    background: rgb(28, 28, 28);
 
     color: white;
 
