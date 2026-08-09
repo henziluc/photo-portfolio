@@ -584,6 +584,34 @@ footer{
 
 }
 
+.favorite-button {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+
+    border: none;
+
+    background: white;
+
+    width: 30px;
+
+    height: 30px;
+
+
+    border-radius: 50%;
+
+
+    font-size: 22px;
+
+
+    cursor: pointer;
+
+}
+
 
 @media(max-width:900px) {
 

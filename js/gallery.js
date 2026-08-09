@@ -1,3 +1,6 @@
+let favorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
 import { photos } from "./data.js";
 
 // ======================
@@ -47,6 +50,14 @@ function renderGallery(photoList) {
                     alt="${photo.title}"
                     data-index="${index}">
 
+                <button
+                    class="favorite-button"
+                    data-id="${photo.id}">
+    
+                    ♡
+
+                </button>
+
                 <figcaption>
 
                     ${photo.title}
@@ -59,6 +70,8 @@ function renderGallery(photoList) {
     });
 
     addImageClickEvents();
+    addFavoriteEvents();
+    updateFavoriteButtons();
 
 }
 
@@ -216,28 +229,156 @@ filterButtons.forEach(button => {
 
         const category = button.dataset.category;
 
-        if (category === "all") {
+        filterButtons.forEach(button => {
 
-            renderGallery(photos);
+            button.addEventListener("click", () => {
 
-        } else {
 
-            const filteredPhotos = photos.filter(photo => {
+                const category = button.dataset.category;
 
-                return photo.category === category;
+
+                let filteredPhotos;
+
+
+                if (category === "all") {
+
+
+                    filteredPhotos = photos;
+
+
+                }
+                else if (category === "favorites") {
+
+
+                    filteredPhotos = photos.filter(photo => {
+
+                        return favorites.includes(photo.id);
+
+                    });
+
+
+                }
+                else {
+
+
+                    filteredPhotos = photos.filter(photo => {
+
+                        return photo.category === category;
+
+                    });
+
+
+                }
+
+
+                renderGallery(filteredPhotos);
+
 
             });
-            
-            renderGallery(filteredPhotos);
 
-        }
+        });
 
     });
 
 });
+
+
+// ======================
+// Favourite Function
+// ======================
+
+
+function toggleFavorite(id) {
+
+    if (favorites.includes(id)) {
+
+        favorites =
+            favorites.filter(photoId =>
+                photoId !== id
+            );
+
+    }
+    else {
+
+        favorites.push(id);
+
+    }
+
+
+    localStorage.setItem(
+        "favorites",
+        JSON.stringify(favorites)
+    );
+
+}
+
+function addFavoriteEvents() {
+
+    const buttons =
+        document.querySelectorAll(".favorite-button");
+
+
+    buttons.forEach(button => {
+
+
+        button.addEventListener("click", () => {
+
+
+            const id =
+                button.dataset.id;
+
+
+            toggleFavorite(id);
+
+
+            updateFavoriteButtons();
+
+
+        });
+
+
+    });
+
+}
+
+function updateFavoriteButtons() {
+
+    const buttons =
+        document.querySelectorAll(".favorite-button");
+
+
+    buttons.forEach(button => {
+
+
+        const id =
+            button.dataset.id;
+
+
+        if (favorites.includes(id)) {
+
+            button.textContent = "♥";
+
+        }
+        else {
+
+            button.textContent = "♡";
+
+        }
+
+
+    });
+
+}
 
 // ======================
 // Initial Gallery
 // ======================
 
 renderGallery(photos);
+
+addImageClickEvents();
+
+addFavoriteEvents();
+
+updateFavoriteButtons();
+
