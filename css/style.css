@@ -899,3 +899,189 @@ footer{
 
 }
 
+/* ===========================
+   CONTACT
+=========================== */
+
+.contact-intro {
+
+    max-width: 800px;
+
+    margin: 120px auto 80px;
+
+    padding: 0 30px;
+
+}
+
+
+.contact-intro h1 {
+
+    font-size: clamp(2.5rem, 6vw, 5rem);
+
+    font-weight: 400;
+
+    margin: 20px 0 30px;
+
+}
+
+
+.contact-intro>p:last-child {
+
+    max-width: 600px;
+
+    font-size: 1.1rem;
+
+    line-height: 1.8;
+
+}
+
+.contact-section {
+
+    max-width: 1200px;
+
+    margin: 0 auto 150px;
+
+    padding: 0 30px;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 100px;
+
+}
+
+.form-group {
+
+    margin-bottom: 30px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: .9rem;
+
+}
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 15px 0;
+
+    border-radius: 10px;
+
+    border: none;
+
+    border-bottom: 1px solid #6c6c6c;
+
+    background: rgb(28, 28, 28);
+
+    color: inherit;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    outline: none;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-bottom: 2px solid currentColor;
+
+}
+
+.form-group textarea {
+
+    resize: vertical;
+
+}
+
+.submit-button {
+
+    border: none;
+
+    background: #111;
+
+    color: white;
+
+    padding: 15px 28px;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.submit-button:hover {
+
+    transform: translateX(5px);
+
+}
+
+.contact-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 50px;
+
+    padding-top: 10px;
+
+}
+
+.contact-info a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+    font-size: 1.1rem;
+
+    border-bottom: 1px solid transparent;
+
+    transition: .3s;
+
+}
+
+
+.contact-info a:hover {
+
+    border-bottom: 1px solid currentColor;
+
+}
+
+@media(max-width:800px) {
+
+    .contact-intro {
+
+        margin-top: 70px;
+
+    }
+
+
+    .contact-section {
+
+        grid-template-columns: 1fr;
+
+        gap: 80px;
+
+        margin-bottom: 80px;
+
+    }
+
+}
