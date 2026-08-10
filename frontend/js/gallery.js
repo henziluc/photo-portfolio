@@ -203,10 +203,14 @@ filterButtons.forEach(button => {
 
 console.log("Page category:", pageCategory);
 console.log("Photos:", photos);
+let pagePhotos
 
-const pagePhotos =
-    photos.filter(photo =>
-        photo.folder === pageCategory
-    );
-
+if (pageCategory === "portfolio") {
+        pagePhotos = photos;
+    } else {
+    pagePhotos =
+        photos.filter(photo =>
+            photo.folder === pageCategory
+        );
+}
 renderGallery(pagePhotos);

@@ -6,14 +6,20 @@ export function filterPhotos(
     filterCategory,
     pageCategory
 ) {
-
+    
+    let pagePhotos;
     // First get only photos
     // belonging to this portfolio page
+    if (pageCategory === "portfolio") {
 
-    const pagePhotos = photos.filter(photo =>
-        photo.folder === pageCategory
+        pagePhotos = photos
+
+    } else { 
+
+        pagePhotos = photos.filter(photo =>
+            photo.folder === pageCategory
     );
-
+    }
 
     // Show all photos on this page
 
