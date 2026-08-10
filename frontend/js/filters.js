@@ -1,36 +1,46 @@
 import { photos } from "./data.js";
-
 import { getFavorites } from "./favorites.js";
 
 
-// ======================
-// Filter Photos
-// ======================
+export function filterPhotos(
+    filterCategory,
+    pageCategory
+) {
 
-export function filterPhotos(category) {
+    // First get only photos
+    // belonging to this portfolio page
 
-    if (category === "all") {
+    const pagePhotos = photos.filter(photo =>
+        photo.folder === pageCategory
+    );
 
-        return photos;
+
+    // Show all photos on this page
+
+    if (filterCategory === "all") {
+
+        return pagePhotos;
 
     }
 
 
-    if (category === "favorites") {
+    // Show favorites on this page
 
-        const favorites =
-            getFavorites();
+    if (filterCategory === "favorites") {
 
+        const favorites = getFavorites();
 
-        return photos.filter(photo =>
+        return pagePhotos.filter(photo =>
             favorites.includes(photo.id)
         );
 
     }
 
 
-    return photos.filter(photo =>
-        photo.category === category
+    // Other filters
+
+    return pagePhotos.filter(photo =>
+        photo.category === filterCategory
     );
 
 }

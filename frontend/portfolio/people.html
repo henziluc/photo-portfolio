@@ -10,24 +10,70 @@
 
     <title>People Photography</title>
 
-    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-<body>
-
+<body data-category="people">
+    
     <div id="navbar"></div>
 
+    <header class="page-header">
 
+        <h1>People Photography</h1>
 
-    
+        <p>
+
+            Mountains, lakes, forests and the beauty
+            of nature from around the world.
+
+        </p>
+
+    </header>
+
+    <section class="filters">
+
+        <button data-category="all">All</button>
+
+        <button data-category="favorites">Favorites</button>
+
+    </section>
+
+    <section class="gallery">
+
+        <div class="gallery-grid" id="gallery">
+
+        </div>
+
+    </section>
+
     <div id="footer"></div>
+
+    <div id="lightbox" class="lightbox">
+
+        <button id="previous" class="lightbox-button">
+            ←
+        </button>
+
+        <img id="lightbox-image" alt="Large Image">
+
+        <p id="lightbox-title"></p>
+
+        <p id="image-counter"></p>
+
+        <button id="next" class="lightbox-button">
+            →
+        </button>
+
+        <button id="close" class="close-button">
+            ✕
+        </button>
+
+    </div>
 
     <script type="module" src="/frontend/js/gallery.js"></script>
     <script type="module" src="/frontend/js/components.js"></script>
 
 </body>
-
-
 
 </html>

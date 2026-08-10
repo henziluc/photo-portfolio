@@ -1,3 +1,6 @@
+const pageCategory =
+    document.body.dataset.category;
+
 import { photos } from "./data.js";
 
 import {
@@ -169,23 +172,22 @@ filterButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-
-        filterButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
 
         button.classList.add("active");
 
 
         const category =
             button.dataset.category;
-
+        
 
         const filteredPhotos =
-            filterPhotos(category);
+            filterPhotos(
+                category,
+                pageCategory
+            );
 
 
         renderGallery(filteredPhotos);
@@ -199,4 +201,12 @@ filterButtons.forEach(button => {
 // Initial Gallery
 // ======================
 
-renderGallery(photos);
+console.log("Page category:", pageCategory);
+console.log("Photos:", photos);
+
+const pagePhotos =
+    photos.filter(photo =>
+        photo.folder === pageCategory
+    );
+
+renderGallery(pagePhotos);
